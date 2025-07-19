@@ -2,15 +2,20 @@
 
 namespace App\Helpers\Traits;
 
+use App\Helpers\Cart\Cart;
+
 trait CartTrait
 {
     public int $quantity = 1;
 
     public function add2Cart(int $productId, $quantity = false)
     {
-        dump($productId);
+        $quantity = $quantity ? $this->quantity : 1;
+        if ($quantity < 1) {
+            $quantity = 1;
+        }
+        $res = Cart::add2Cart($productId, $quantity);
     }
-
 }
 /*
 
