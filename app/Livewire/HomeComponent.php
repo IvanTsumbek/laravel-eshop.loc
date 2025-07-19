@@ -2,11 +2,14 @@
 
 namespace App\Livewire;
 
+use App\Helpers\Traits\CartTrait;
 use App\Models\Product;
 use Livewire\Component;
 
 class HomeComponent extends Component
 {
+    use CartTrait;
+    
     public function render()
     {
         $hits_products = Product::query()->orderBy('id', 'desc')->where('is_hit', '=', 1)->limit(4)->get();
