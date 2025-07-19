@@ -47,10 +47,17 @@ class Cart
 
 
     //get cart items
-
+    public static function getCartQuantityItems(): int
+    {
+        return count(self::getCart());
+    }
 
     //get cart quantity
-
+    public static function getCartQuantityTotal(): int
+    {
+        $cart = self::getCart();
+        return array_sum(array_column($cart, 'quantity'));
+    }
 
     //has product in cart
     public static function hasProductInCart(int $productId): bool
