@@ -21,6 +21,16 @@ trait CartTrait
             $this->js("toastr.error('Oops! Something went wrong')");
         }
     }
+
+    public function removeFromCart(int $productId): void
+    {
+        if (Cart::removeProductFromCart($productId)) {
+            $this->js("toastr.success('Product removed from cart successfully')");
+            $this->dispatch('cart-updated');
+        } else {
+            $this->js("toastr.error('Oops! Something went wrong')");
+        };
+    }
 }
 /*
 
