@@ -143,7 +143,9 @@
                                         Catalog
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end">
-                                        <li>
+                                        {!!\App\Helpers\Category\Category::getMenu('incs.menu-tpl', 'categories_html')!!}
+
+                                        <!-- <li>
                                             <a class="dropdown-item" href="category.html">Shoes</a>
                                         </li>
                                         <li>
@@ -169,7 +171,7 @@
                                         </li>
                                         <li>
                                             <a class="dropdown-item" href="category.html">Shirts</a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </li>
                             </ul>
