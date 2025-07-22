@@ -2,12 +2,31 @@
 
 namespace App\Livewire\Product;
 
+use App\Models\Product;
 use Livewire\Component;
+use App\Models\Category;
 
 class CategoryComponent extends Component
 {
+    public string $slug = '';
+
+    public function mount($slug)
+    {
+        $this->slug = $slug;
+    }
+
     public function render()
     {
-        return view('livewire.product.category-component');
+        $category = Category::query()->where('slug', '=', $this->slug)->firstOrFail();
+        $ids = \App\Helpers\Category\Category::getIds($category->id) . $category->id;
+       
+        $products = Product::query()
+        ->whereIn('category_id', explode(',', $ids))
+        ->orderBy('id', 'desc')
+        ->paginate(3);
+        return view('livewire.product.category-component', [
+        'products' => $products,
+        'category' => $category,
+    ]);
     }
 }

@@ -24,17 +24,6 @@ class Category
             cache([$cacheKey => $menu_html], now()->addDay());
         }
         return $menu_html;
-
-    }
-
-    public static function getCategories()
-    {
-        $categories_data = Container::get('categories_data');
-        if (!$categories_data) {
-            $categories_data = \App\Models\Category::all()->keyBy('id')->toArray();
-            Container::set('categories_data', $categories_data);
-        }
-        return $categories_data;
     }
 
     public static function getTree($data): array
@@ -64,5 +53,28 @@ class Category
         ob_start();
         echo view(self::$tpl, ['item' => $item, 'tab' => $tab, 'id' => $id]);
         return ob_get_clean();
+    }
+
+    public static function getCategories()
+    {
+        $categories_data = Container::get('categories_data');
+        if (!$categories_data) {
+            $categories_data = \App\Models\Category::all()->keyBy('id')->toArray();
+            Container::set('categories_data', $categories_data);
+        }
+        return $categories_data;
+    }
+
+    public static function getIds(int $category_id): string
+    {
+        $categories = self::getCategories();
+        $ids = '';
+        foreach ($categories as $category) {
+            if ($category['parent_id'] == $category_id) {
+                $ids .= $category['id'] . ',';
+                $ids .= self::getIds($category['id']);
+            }
+        }
+        return $ids;
     }
 }
