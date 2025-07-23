@@ -2,12 +2,16 @@
 
 namespace App\Livewire\Product;
 
+use App\Helpers\Traits\CartTrait;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
+use Livewire\WithPagination;
 
 class CategoryComponent extends Component
 {
+    use WithPagination, CartTrait;
+
     public string $slug = '';
 
     public function mount($slug)

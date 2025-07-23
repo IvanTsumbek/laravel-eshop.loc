@@ -74,7 +74,7 @@ img {
     color: var(--contrast-color);
 }
 
-#toast-container > div.toast {
+#toast-container>div.toast {
     opacity: 1;
     box-shadow: none;
     background-image: none !important;
@@ -124,6 +124,16 @@ img {
 
 #toast-container ul {
     list-style: none;
+}
+
+.update-loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, .7);
+    z-index: 2;
+    text-align: center;
+    padding-top: 20px;
 }
 
 /* ============================= General rules ============================ */
