@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Product;
 
+use App\Helpers\Category\Category as CategoryCategory;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
@@ -38,7 +39,7 @@ class CategoryComponent extends Component
         $this->sort = isset($this->sortList[$this->sort]) ? $this->sort : 'default';
     }
 
-     public function changeLimit()
+    public function changeLimit()
     {
         $this->limit = in_array($this->limit, $this->limitList) ? $this->limit : $this->limitList[0];
         $this->resetPage();
@@ -54,9 +55,13 @@ class CategoryComponent extends Component
             ->whereIn('category_id', explode(',', $ids))
             ->orderBy($this->sortList[$this->sort]['order_field'], $this->sortList[$this->sort]['order_direction'])
             ->paginate($this->limit);
+
+        $breadcrumbs = \App\Helpers\Category\Category::getBreadcrumbs($category->id);
+
         return view('livewire.product.category-component', [
             'products' => $products,
             'category' => $category,
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 }
