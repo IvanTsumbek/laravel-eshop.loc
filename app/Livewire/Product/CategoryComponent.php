@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Product;
 
-use App\Helpers\Category\Category as CategoryCategory;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use App\Helpers\Traits\CartTrait;
+use Illuminate\Support\Facades\DB;
 
 class CategoryComponent extends Component
 {
@@ -50,6 +50,20 @@ class CategoryComponent extends Component
     {
         $category = Category::query()->where('slug', '=', $this->slug)->firstOrFail();
         $ids = \App\Helpers\Category\Category::getIds($category->id) . $category->id;
+        $category_filters = DB::table('category_filters')
+        ->select('category_filters.filter_group_id', 'filter_groups.title', 'filters.id as filter_id', 'filters.title as filter_title')
+        ->join('filter_groups', 'category_filters.filter_group_id', '=', 'filter_groups.id')
+        ->join('filters', 'filters.filter_group_id', '=', 'filter_groups.id')
+        ->whereIn('category_filters.category_id', explode(',', $ids))
+        // ->groupBy('filters.id')
+        ->get();
+
+        $filter_groups = [];
+        foreach( $category_filters as $filter){
+            $filter_groups[$filter->filter_group_id][] = $filter;
+        }
+
+        dump($filter_groups);
 
         $products = Product::query()
             ->whereIn('category_id', explode(',', $ids))
