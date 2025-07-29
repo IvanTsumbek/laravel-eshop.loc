@@ -36,6 +36,10 @@
           </button>
 
           <div class="collapse collapse-filters" id="collapseFilters">
+            <div class="filter-price">
+              <input type="number" class="form-control" wire:model.live.debounce.500ms="min_price" value="{{ $min_price }}">
+              <input type="number" class="form-control" wire:model.live.debounce.500ms="max_price" value="{{ $max_price }}">
+            </div>
             @foreach ($filter_groups as $key => $filter_group)
             <div class="filter-block" wire:key="{{ $key }}">
               <h5 class="section-title"><span>Filter by {{ $filter_group[0]->title }}</span></h5>
@@ -43,7 +47,7 @@
               <div class="form-check d-flex justify-content-between" wire:key="{{ $filter->filter_id }}">
                 <div>
                   <input wire:model.live="selected_filters"
-                  class="form-check-input" type="checkbox" value="{{ $filter->filter_id }}" id="filter-{{ $filter->filter_id }}">
+                    class="form-check-input" type="checkbox" value="{{ $filter->filter_id }}" id="filter-{{ $filter->filter_id }}">
                   <label class="form-check-label" for="filter-{{ $filter->filter_id }}">
                     {{ $filter->filter_title }}
                   </label>

@@ -35,6 +35,12 @@ class CategoryComponent extends Component
     #[Url]
     public array $selected_filters = [];
 
+    #[Url]
+    public $min_price;
+
+    #[Url]
+    public $max_price;
+
     public function mount($slug)
     {
         $this->slug = $slug;
@@ -43,7 +49,7 @@ class CategoryComponent extends Component
     public function updated($property)
     {
         $property = explode('.', $property);
-        if ($property[0] == 'selected_filters'){
+        if (in_array($property[0], ['selected_filters', 'min_price', 'max_price'])) {
             $this->resetPage();
         }
     }
@@ -64,6 +70,18 @@ class CategoryComponent extends Component
     {
         $category = Category::query()->where('slug', '=', $this->slug)->firstOrFail();
         $ids = \App\Helpers\Category\Category::getIds($category->id) . $category->id;
+
+        if (is_null($this->min_price) || is_null($this->max_price)) {
+            $min_max_price = DB::table('products')
+                ->select(DB::raw('min(price) as min_price, max(price) as max_price'))
+                ->whereIn('category_id', explode(',', $ids))
+                ->get();
+            $this->min_price =  $this->min_price ?? $min_max_price[0]->min_price;
+            $this->max_price =  $this->max_price ?? $min_max_price[0]->max_price;
+            // dump($this->min_price);
+            // dump($this->max_price);
+        }
+
         $category_filters = DB::table('category_filters')
             ->select('category_filters.filter_group_id', 'filter_groups.title', 'filters.id as filter_id', 'filters.title as filter_title')
             ->join('filter_groups', 'category_filters.filter_group_id', '=', 'filter_groups.id')
@@ -95,6 +113,7 @@ class CategoryComponent extends Component
                     ->groupBy('products.id')
                     ->havingRaw('count(distinct filter_products.filter_group_id) >= ?', [$cnt_filter_groups]);
             })
+            ->whereBetween('price', [$this->min_price,  $this->max_price])
             ->orderBy($this->sortList[$this->sort]['order_field'], $this->sortList[$this->sort]['order_direction'])
             ->paginate($this->limit);
 
