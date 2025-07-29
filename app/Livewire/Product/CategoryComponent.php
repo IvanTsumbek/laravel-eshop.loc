@@ -40,6 +40,15 @@ class CategoryComponent extends Component
         $this->slug = $slug;
     }
 
+    public function updated($property)
+    {
+        $property = explode('.', $property);
+        if ($property[0] == 'selected_filters'){
+            $this->resetPage();
+        }
+    }
+
+
     public function changeSort()
     {
         $this->sort = isset($this->sortList[$this->sort]) ? $this->sort : 'default';
@@ -55,7 +64,6 @@ class CategoryComponent extends Component
     {
         $category = Category::query()->where('slug', '=', $this->slug)->firstOrFail();
         $ids = \App\Helpers\Category\Category::getIds($category->id) . $category->id;
-
         $category_filters = DB::table('category_filters')
             ->select('category_filters.filter_group_id', 'filter_groups.title', 'filters.id as filter_id', 'filters.title as filter_title')
             ->join('filter_groups', 'category_filters.filter_group_id', '=', 'filter_groups.id')
