@@ -623,6 +623,11 @@ footer a:hover {
     gap: 10px;
     margin-bottom: 20px;
 }
+
+.selected-filters p {
+    cursor: pointer;
+    margin-bottom: 0;
+}
 /* ============================= Category Page ============================ */
 
 /* ============================= Product Page ============================ */

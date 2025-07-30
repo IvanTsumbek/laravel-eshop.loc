@@ -66,6 +66,21 @@ class CategoryComponent extends Component
         $this->resetPage();
     }
 
+    public function removeFilter($filter_id)
+    {
+        if (false !== ($key = array_search($filter_id, $this->selected_filters))) {
+            unset($this->selected_filters[$key]);
+            $this->selected_filters = array_values($this->selected_filters);
+            $this->resetPage();
+        }
+    }
+
+    public function clearFilters()
+    {
+        $this->selected_filters = [];
+         $this->resetPage();
+    }
+
     public function render()
     {
         $category = Category::query()->where('slug', '=', $this->slug)->firstOrFail();
@@ -78,8 +93,6 @@ class CategoryComponent extends Component
                 ->get();
             $this->min_price =  $this->min_price ?? $min_max_price[0]->min_price;
             $this->max_price =  $this->max_price ?? $min_max_price[0]->max_price;
-            // dump($this->min_price);
-            // dump($this->max_price);
         }
 
         $category_filters = DB::table('category_filters')
