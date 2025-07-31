@@ -7,5 +7,5 @@ use App\Livewire\Product\CategoryComponent;
 
 Route::get('/', HomeComponent::class)->name('home');
 Route::get('/category/{slug}', CategoryComponent::class)->name('category');
-Route::get('/product', ProductComponent::class)->name('product');
+Route::get('/product/{slug}', ProductComponent::class)->name('product');
 
