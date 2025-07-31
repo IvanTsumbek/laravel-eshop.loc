@@ -44,6 +44,12 @@ class CategoryComponent extends Component
     public function mount($slug)
     {
         $this->slug = $slug;
+        if (!isset($this->sortList[$this->sort])) {
+            $this->redirectRoute('category', ['slug' => $slug], navigate: true);
+        }
+        if (!in_array($this->limit, $this->limitList)) {
+            $this->redirectRoute('category', ['slug' => $slug], navigate: true);
+        }
     }
 
     public function updated($property)
@@ -78,7 +84,7 @@ class CategoryComponent extends Component
     public function clearFilters()
     {
         $this->selected_filters = [];
-         $this->resetPage();
+        $this->resetPage();
     }
 
     public function render()
