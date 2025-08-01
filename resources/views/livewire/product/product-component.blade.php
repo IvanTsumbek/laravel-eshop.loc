@@ -23,21 +23,16 @@
           <div id="carouselExampleFade" class="carousel carousel-dark slide carousel-fade">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="assets/img/products/1.jpg" class="d-block w-100" alt="...">
+                <img src="{{ asset($product->getImage()) }}" class="d-block w-100" alt="...">
               </div>
+              @foreach ($product->gallery as $item)
               <div class="carousel-item">
-                <img src="assets/img/products/2.jpg" class="d-block w-100" alt="...">
+                <img src="{{ asset($item) }}" class="d-block w-100" alt="...">
               </div>
-              <div class="carousel-item">
-                <img src="assets/img/products/3.jpg" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="assets/img/products/4.jpg" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="assets/img/products/5.jpg" class="d-block w-100" alt="...">
-              </div>
+              @endforeach
             </div>
+
+            @if($product->gallery)
             <button class="carousel-control-prev" type="button"
               data-bs-target="#carouselExampleFade" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -48,22 +43,23 @@
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>
+            @endif
           </div>
         </div>
       </div>
 
       <div class="col-md-7 col-lg-8 mb-3">
         <div class="bg-white product-content p-3 h-100">
-          <h1 class="section-title h3"><span>Product Name</span></h1>
+          <h1 class="section-title h3"><span>{{ $product->title }}</span></h1>
 
           <div class="product-price">
-            <small>$70</small>
-            $65
+            @if($product->old_price)
+            <small>${{$product->old_price}}</small>
+            @endif
+            ${{ $product->price }}
           </div>
 
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ducimus adipisci alias,
-            minus totam fugiat quia unde ipsum aliquam suscipit officia ut iure sunt quis,
-            doloremque quibusdam, similique eos veritatis.</p>
+          <p>{{ $product->excerpt }}</p>
 
           <div class="product-add2cart">
             <div class="input-group">
@@ -128,42 +124,34 @@
                 data-bs-target="#description-tab-pane" type="button" role="tab"
                 aria-controls="description-tab-pane" aria-selected="true">Description</button>
             </li>
+            @if($attributes->isNotEmpty())
             <li class="nav-item" role="presentation">
               <button class="nav-link" id="features-tab" data-bs-toggle="tab"
                 data-bs-target="#features-tab-pane" type="button" role="tab"
                 aria-controls="features-tab-pane" aria-selected="false">Features</button>
             </li>
+            @endif
           </ul>
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="description-tab-pane" role="tabpanel"
               aria-labelledby="description-tab" tabindex="0">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure numquam ratione
-                voluptatibus reiciendis? Vitae ex nesciunt repudiandae sunt deserunt! Quis
-                numquam cum architecto illum, officia quo possimus! Earum, illo quaerat!</p>
-              <p>Dolores illum sed officia? Assumenda iusto quis exercitationem eligendi, totam
-                laudantium dignissimos quae corrupti soluta quasi ipsum nemo recusandae!
-                Recusandae quibusdam maiores beatae et inventore architecto amet obcaecati vel
-                neque.</p>
-              <p>Obcaecati libero atque, excepturi facere magnam nulla, iure tempora ipsum dolorem
-                autem eius cum exercitationem ad perspiciatis laboriosam rerum! Id, unde
-                recusandae velit quam exercitationem quia minus nihil molestias dolorem?</p>
+              {!! $product->content !!}
             </div>
+            @if($attributes->isNotEmpty())
             <div class="tab-pane fade" id="features-tab-pane" role="tabpanel"
               aria-labelledby="features-tab" tabindex="0">
               <table class="table">
                 <tbody>
+                  @foreach ($attributes as $attribute)
                   <tr>
-                    <th scope="row">Colors</th>
-                    <td>white, black, pink</td>
+                    <th scope="row">{{ $attribute->filter_groups_title }}</th>
+                    <td>{{ $attribute->filters_title }}</td>
                   </tr>
-                  <tr>
-                    <th scope="row">Sizes</th>
-                    <td>S, M, L</td>
-                  </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
-
+            @endif
           </div>
         </div>
       </div>
