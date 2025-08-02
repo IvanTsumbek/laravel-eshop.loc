@@ -6,11 +6,11 @@ use App\Helpers\Cart\Cart;
 
 trait CartTrait
 {
-    public int $quantity = 1;
+    public $quantity = 1;
 
     public function add2Cart(int $productId, $quantity = false)
     {
-        $quantity = $quantity ? $this->quantity : 1;
+        $quantity = $quantity ? (int)$this->quantity : 1;
         if ($quantity < 1) {
             $quantity = 1;
         }

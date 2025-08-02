@@ -6,11 +6,14 @@ use App\Models\Product;
 use Livewire\Component;
 
 use App\Helpers\Category\Category;
+use App\Helpers\Traits\CartTrait;
 use App\Models\FilterGroup;
 use Illuminate\Cache\RateLimiting\Limit;
 
 class ProductComponent extends Component
 {
+    use CartTrait;
+    
     public string $slug = '';
 
     public function mount($slug)
