@@ -59,25 +59,7 @@
                         </div>
 
                         <div class="col-6 col-sm-4">
-                            <div class="header-top-account d-flex justify-content-end">
-                                <div class="btn-group me-2">
-                                    <div class="dropdown">
-                                        <button class="btn btn-sm dropdown-toggle" type="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Account
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <a class="dropdown-item" href="#">Sign In</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#">Sign Up</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ./header-top-account -->
+                            <livewire:user.nav-component />
                         </div>
                     </div>
                 </div>
@@ -163,7 +145,8 @@
                     <div class="col-md-3 col-6">
                         <h4>Information</h4>
                         <ul class="list-unstyled">
-                            <li><a href="{{route('home')}}">Home</a></li>  </ul>
+                            <li><a href="{{route('home')}}">Home</a></li>
+                        </ul>
                     </div>
                     <div class="col-md-3 col-6">
                         <h4>Working hours</h4>
