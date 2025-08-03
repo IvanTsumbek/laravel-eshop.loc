@@ -4,7 +4,7 @@
             <div class="col-12">
                 <nav class="breadcrumbs">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ route('home') }}">Home</a></li>
                         <li><span>Registration</span></li>
                     </ul>
                 </nav>
@@ -25,8 +25,7 @@
                                 <div class="mb-3">
                                     <label for="name" class="form-label required">Name</label>
                                     <input type="text" class="form-control 
-                                    @error('name') is-invalid @enderror" id="name" placeholder="Name" wire:model="name"
-                                        required2>
+                                    @error('name') is-invalid @enderror" id="name" placeholder="Name" wire:model="name">
                                     @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -36,8 +35,7 @@
 
                                 <div class="mb-3">
                                     <label for="email" class="form-label required">Email</label>
-                                    <input type="email" class="form-control  @error('email') is-invalid @enderror" id="email" placeholder="Email" wire:model="email"
-                                        required2>
+                                    <input type="email" class="form-control  @error('email') is-invalid @enderror" id="email" placeholder="Email" wire:model="email">
                                     @error('email')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -48,7 +46,7 @@
                                 <div class="mb-3">
                                     <label for="password" class="form-label required">Password</label>
                                     <input type="password" class="form-control @error('password') is-invalid @enderror" id="password"
-                                        placeholder="Password" wire:model="password" required2>
+                                        placeholder="Password" wire:model="password">
                                     @error('password')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -63,15 +61,13 @@
                                             <div class="spinner-grow spinner-grow-sm" role="status">
                                                 <span class="visually-hidden">Loading...</span>
                                             </div>
+                                        </div>
                                     </button>
                                 </div>
-
                             </form>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>

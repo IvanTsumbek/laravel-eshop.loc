@@ -180,6 +180,13 @@
         width="100%" height="450" style="border:0; display: block;" allowfullscreen="" loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>
+@if(session('success'))
+    @script
+    <script>
+        toastr.success("{{ session('success') }}")
+    </script>
+    @endscript
+@endif
 
 @script
 <script>
