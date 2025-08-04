@@ -1,13 +1,12 @@
 <?php
 
-use App\Livewire\HomeComponent;
 use Illuminate\Support\Facades\Route;
-use App\Livewire\Product\ProductComponent;
-use App\Livewire\Product\CategoryComponent;
 
-Route::get('/', HomeComponent::class)->name('home');
-Route::get('/category/{slug}', CategoryComponent::class)->name('category');
-Route::get('/product/{slug}', ProductComponent::class)->name('product');
+Route::get('/', App\Livewire\HomeComponent::class)->name('home');
+Route::get('/category/{slug}', App\Livewire\Product\CategoryComponent::class)->name('category');
+Route::get('/product/{slug}', App\Livewire\Product\ProductComponent::class)->name('product');
+Route::get('/cart', App\Livewire\Cart\Cart::class)->name('cart');
+
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', App\Livewire\User\RegisterComponent::class)->name('register');
