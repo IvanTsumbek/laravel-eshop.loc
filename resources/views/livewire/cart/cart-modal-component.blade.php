@@ -12,15 +12,16 @@
                         @foreach ($cart as $id => $item)
                         <tr wire:key="{{ $id }}">
                             <td class="product-img-td"><a href="{{route('product', $item['slug'])}}">
-                                <img src="{{ asset($item['image']) }}" alt=""></a>
+                                    <img src="{{ asset($item['image']) }}" alt=""></a>
                             </td>
                             <td><a href="{{route('product', $item['slug'])}}">{{ $item['title'] }}</a></td>
                             <td>{{ $item['price'] }}</td>
                             <td>&times;{{ $item['quantity'] }}</td>
-                            <td><button class="btn btn-danger" wire:click="removeFromCart({{ $id }})"
-                            wire:loading.attr="disabled" wire:target="removeFromCart">
-                                <i class="fa-regular fa-circle-xmark"></i>
-                            </button>
+                            <td>
+                                <button class="btn btn-danger" wire:click="removeFromCart({{ $id }})"
+                                    wire:loading.attr="disabled" wire:target="removeFromCart">
+                                    <i class="fa-regular fa-circle-xmark"></i>
+                                </button>
                             </td>
                         </tr>
                         @endforeach

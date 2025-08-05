@@ -49,7 +49,10 @@ public static function removeProductFromCart(int $productId): bool
     }
 
     //clear cart
-
+    public static function clearCart()
+    {
+        session()->forget('cart');
+    }
 
     //get cart total sum
     public static function getCartTotal(): int
@@ -80,7 +83,15 @@ public static function removeProductFromCart(int $productId): bool
     {
         return session()->has("cart.$productId");
     }
-
+    
     //update item quantity
-
+     public static function updateItemQuantity(int $productId, int $quantity): bool
+     {
+        $updated = false;
+        if(self::hasProductInCart($productId)){
+            session(["cart.{$productId}.quantity" => $quantity]);
+        $updated = true;
+        }
+        return $updated;
+     }
 }
