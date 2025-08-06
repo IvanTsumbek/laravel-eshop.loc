@@ -37,7 +37,7 @@
 
             <div class="text-end mt-3">
                 <a wire:navigate href="{{ route('cart') }}" class="btn btn-outline-warning">Cart</a>
-                <a href="#" class="btn btn-outline-secondary">Checkout</a>
+                <a wire:navigate href="{{ route('checkout') }}" class="btn btn-outline-secondary">Checkout</a>
             </div>
             @else
             <p>Cart is empty...</p>

@@ -114,7 +114,7 @@
                     </div>
                     @if ($cart)
                         <div class="d-grid">
-                            <a href="#" class="btn btn-warning">Checkout</a>
+                            <a wire:navigate href="{{ route('checkout') }}" class="btn btn-warning">Checkout</a>
                         </div>
                     @endif
                 </div>
