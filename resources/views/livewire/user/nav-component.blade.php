@@ -16,7 +16,7 @@
                 @endguest
                 @auth
                 <li>
-                    <a class="dropdown-item" href="#">Your account</a>
+                    <a class="dropdown-item" href="{{ route('account') }}">Your account</a>
                 </li>
                 <li>
                     <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>

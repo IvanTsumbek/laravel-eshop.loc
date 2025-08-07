@@ -15,8 +15,12 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/logout', function (){
+    Route::get('/logout', function () {
         auth()->logout();
         return redirect()->route('login');
     })->name('logout');;
+    Route::get('/account', App\Livewire\User\AccountComponent::class)->name('account');
+    Route::get('/change-account', App\Livewire\User\ChangeAccountComponent::class)->name('change-account');
+    Route::get('/orders', App\Livewire\User\OrderComponent::class)->name('orders');
+    Route::get('/order-show/{id}', App\Livewire\User\OrderShowComponent::class)->name('order-show');
 });
