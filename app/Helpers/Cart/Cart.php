@@ -6,7 +6,6 @@ use App\Models\Product;
 
 class Cart
 {
-
     //add product to cart
     public static function add2Cart(int $productId, int $quantity = 1): bool
     {
