@@ -5,8 +5,11 @@ namespace App\Livewire\Cart;
 use App\Models\Order;
 use Livewire\Component;
 use App\Helpers\Cart\Cart;
+use App\Mail\OrderClient;
+use App\Mail\OrderManager;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutComponent extends Component
 {
@@ -49,6 +52,13 @@ class CheckoutComponent extends Component
                 ];
             }
             $order->orderProducts()->createMany($order_products);
+
+            Mail::to($validated['email'])->send(new OrderClient(
+                $order_products, $validated['total'], $order->id, $validated['note']));
+            Mail::to('manager@laravel-eshop.loc')->send(new OrderManager($order->id));
+
+            Cart::clearCart();
+            $this->dispatch('cart-updated');
             $this->js("toastr.success('Success ordering!')");
             DB::commit();
         } catch (\Exception $e) {
