@@ -19,6 +19,7 @@
   </div>
 
   <div class="container position-relative">
+    
     <div class="update-loading" wire:loading wire:target.except="add2Cart">
       <div class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
