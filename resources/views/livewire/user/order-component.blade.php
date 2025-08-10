@@ -6,7 +6,8 @@
                 <nav class="breadcrumbs">
                     <ul>
                         <li><a wire:navigate href="{{ route('home') }}">Home</a></li>
-                        <li><span>Account</span></li>
+                        <li><a wire:navigate href="{{ route('account') }}">Account</a></li>
+                        <li><span>Orders</span></li>
                     </ul>
                 </nav>
             </div>
