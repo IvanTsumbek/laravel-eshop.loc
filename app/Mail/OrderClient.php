@@ -21,7 +21,7 @@ class OrderClient extends Mailable
         public array $cart,
         public int $total,
         public int $order_id,
-        public string $note = '',
+        public ?string $note = '',
     ) {
         //
     }

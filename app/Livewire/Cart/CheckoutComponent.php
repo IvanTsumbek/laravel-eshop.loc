@@ -53,14 +53,24 @@ class CheckoutComponent extends Component
             }
             $order->orderProducts()->createMany($order_products);
 
-            Mail::to($validated['email'])->send(new OrderClient(
-                $order_products, $validated['total'], $order->id, $validated['note']));
-            Mail::to('manager@laravel-eshop.loc')->send(new OrderManager($order->id));
+            DB::commit();
+
+            try {
+                Mail::to($validated['email'])->send(new OrderClient(
+                    $order_products,
+                    $validated['total'],
+                    $order->id,
+                    $validated['note']
+                ));
+                Mail::to('manager@laravel-eshop.loc')->send(new OrderManager($order->id));
+            } catch (\Exception $e) {
+                Log::error($e->getMessage());
+            }
 
             Cart::clearCart();
             $this->dispatch('cart-updated');
             $this->js("toastr.success('Success ordering!')");
-            DB::commit();
+            
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
