@@ -10,17 +10,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{{asset('assets/libs/owlcarousel/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/libs/owlcarousel/owl.theme.default.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/libs/toastr/toastr.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
-    <link rel="shortcut icon" href="{{asset('assets/img/favicon.ico')}}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset('assets/libs/owlcarousel/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/libs/owlcarousel/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/libs/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.ico') }}" type="image/x-icon">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script src="{{asset('assets/libs/owlcarousel/owl.carousel.min.js')}}" defer></script>
-    <script src="{{asset('assets/libs/toastr/toastr.min.js')}}" defer></script>
-    <script src="{{asset('assets/js/main.js')}}" defer></script>
+    <script src="{{ asset('assets/libs/owlcarousel/owl.carousel.min.js') }}" defer></script>
+    <script src="{{ asset('assets/libs/toastr/toastr.min.js') }}" defer></script>
+    <script src="{{ asset('assets/js/main.js') }}" defer></script>
 </head>
 
 <body>
@@ -71,24 +71,13 @@
                     <div class="row align-items-center">
 
                         <div class="col-sm-6">
-                            <a wire:navigate href="{{route('home')}}" class="header-logo h1">E-Shop</a>
+                            <a wire:navigate href="{{ route('home') }}" class="header-logo h1">E-Shop</a>
                         </div>
 
-                        <div class="col-sm-6 mt-2 mt-md-0">
-                            <form action="">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="s" placeholder="Searching..."
-                                        aria-label="Searching..." aria-describedby="button-search">
-                                    <button class="btn btn-outline-warning" type="submit" id="button-search">
-                                        <i class="fa-solid fa-magnifying-glass"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                        <livewire:search.search-form-component/>
 
                     </div>
                 </div>
-
             </div>
             <!-- ./header-middle -->
         </header>
@@ -111,15 +100,16 @@
                         <div class="offcanvas-body">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a wire:navigate class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
+                                    <a wire:navigate class="nav-link active" aria-current="page"
+                                        href="{{ route('home') }}">Home</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false" data-bs-auto-close="outside">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                                         Catalog
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end">
-                                        {!!\App\Helpers\Category\Category::getMenu('incs.menu-tpl', 'categories_html')!!}
+                                        {!! \App\Helpers\Category\Category::getMenu('incs.menu-tpl', 'categories_html') !!}
                                     </ul>
                                 </li>
                             </ul>
@@ -135,7 +125,7 @@
 
         <main class="main">
 
-            {{$slot}}
+            {{ $slot }}
 
         </main>
 
@@ -145,7 +135,7 @@
                     <div class="col-md-3 col-6">
                         <h4>Information</h4>
                         <ul class="list-unstyled">
-                            <li><a href="{{route('home')}}">Home</a></li>
+                            <li><a href="{{ route('home') }}">Home</a></li>
                         </ul>
                     </div>
                     <div class="col-md-3 col-6">
