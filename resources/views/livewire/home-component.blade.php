@@ -1,8 +1,14 @@
 <div>
+
+    @section('metatags')
+        <title>{{ config('app.name') . '::' . ($title ?? 'Page Title') }}</title>
+        <meta name="description" content="{{ $desc ?? 'default...' }}">
+    @endsection
+
     <div id="carousel" class="carousel slide carousel-fade">
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active"
-                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true"
+                aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
             <button type="button" data-bs-target="#carousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
@@ -107,48 +113,48 @@
     </section>
 
     @if ($hits_products->isNotEmpty())
-    <section class="featured-products">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-12">
-                    <h2 class="section-title">
-                        <span>Рекомендуемые товары</span>
-                    </h2>
+        <section class="featured-products">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <h2 class="section-title">
+                            <span>Рекомендуемые товары</span>
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    @foreach ($hits_products as $product)
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-3" wire:key="{{ $product->id }}">
+                            @include('incs.product-card')
+                        </div>
+                    @endforeach
+
                 </div>
             </div>
-
-            <div class="row">
-                @foreach ($hits_products as $product)
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-3" wire:key="{{$product->id}}">
-                      @include('incs.product-card')
-                </div>
-                @endforeach
-
-            </div>
-        </div>
-    </section>
+        </section>
     @endif
 
     @if ($new_products->isNotEmpty())
-    <section class="new-products">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-12">
-                    <h2 class="section-title">
-                        <span>Новинки</span>
-                    </h2>
+        <section class="new-products">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <h2 class="section-title">
+                            <span>Новинки</span>
+                        </h2>
+                    </div>
                 </div>
-            </div>
-            <div class="owl-carousel owl-theme owl-carousel-full" wire:ignore>
-                @foreach ($new_products as $product)
-                <div wire:key="{{$product->id}}">
-                    @include('incs.product-card')
+                <div class="owl-carousel owl-theme owl-carousel-full" wire:ignore>
+                    @foreach ($new_products as $product)
+                        <div wire:key="{{ $product->id }}">
+                            @include('incs.product-card')
+                        </div>
+                    @endforeach
                 </div>
-                @endforeach
-            </div>
 
-        </div>
-    </section>
+            </div>
+        </section>
     @endif
     <section class="about-us" id="about">
         <div class="container">
@@ -180,34 +186,34 @@
         width="100%" height="450" style="border:0; display: block;" allowfullscreen="" loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>
-@if(session('success'))
+@if (session('success'))
     @script
-    <script>
-        toastr.success("{{ session('success') }}")
-    </script>
+        <script>
+            toastr.success("{{ session('success') }}")
+        </script>
     @endscript
 @endif
 
 @script
-<script>
-    $(function() {
-        $(".owl-carousel-full").owlCarousel({
-            margin: 20,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                500: {
-                    items: 2
-                },
-                700: {
-                    items: 3
-                },
-                1000: {
-                    items: 4
+    <script>
+        $(function() {
+            $(".owl-carousel-full").owlCarousel({
+                margin: 20,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    500: {
+                        items: 2
+                    },
+                    700: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 4
+                    }
                 }
-            }
+            });
         });
-    });
-</script>
+    </script>
 @endscript

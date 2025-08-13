@@ -70,7 +70,6 @@ class CheckoutComponent extends Component
             Cart::clearCart();
             $this->dispatch('cart-updated');
             $this->js("toastr.success('Success ordering!')");
-            
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
@@ -80,6 +79,8 @@ class CheckoutComponent extends Component
 
     public function render()
     {
-        return view('livewire.cart.checkout-component');
+        return view('livewire.cart.checkout-component', [
+            'title' => 'Checkout',
+        ]);
     }
 }

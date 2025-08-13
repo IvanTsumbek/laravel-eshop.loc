@@ -19,6 +19,7 @@ class OrderComponent extends Component
 
         return view('livewire.user.order-component', [
             'orders' => $orders,
+            'title' => 'Orders',
         ]);
     }
 }

@@ -1,4 +1,10 @@
 <div>
+
+    @section('metatags')
+        <title>{{ config('app.name') . '::' . ($title ?? 'Page Title') }}</title>
+        <meta name="description" content="{{ $desc ?? 'default...' }}">
+    @endsection
+
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -56,8 +62,8 @@
                                             <td>${{ $item['price'] }}</td>
                                             <td x-data="{ qty: {{ $item['quantity'] }} }">
                                                 <div class="input-group" style="flex-wrap: nowrap;">
-                                                    <input type="number" value="{{ $item['quantity'] }}" x-model="qty"
-                                                        class="form-control cart-qty" min="1"
+                                                    <input type="number" value="{{ $item['quantity'] }}"
+                                                        x-model="qty" class="form-control cart-qty" min="1"
                                                         style="width: 80px;">
                                                     <button class="btn btn-warning" wire:loading.attr="disabled"
                                                         x-on:click="$wire.updateItemQuantity({{ $id }}, qty)">
@@ -110,7 +116,8 @@
 
                     <div class="d-flex justify-content-between my-3">
                         <h3>Total</h3>
-                        <h3>{{ \Illuminate\Support\Number::currency(\App\Helpers\Cart\Cart::getCartTotal(), 'USD') }}</h3>
+                        <h3>{{ \Illuminate\Support\Number::currency(\App\Helpers\Cart\Cart::getCartTotal(), 'USD') }}
+                        </h3>
                     </div>
                     @if ($cart)
                         <div class="d-grid">
