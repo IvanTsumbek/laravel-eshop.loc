@@ -8,7 +8,7 @@
             <ul class="dropdown-menu">
                 @guest
                 <li>
-                    <a class="dropdown-item" href="{{ route('login') }}">Login</a>
+                    <a class="dropdown-item" href="{{ route('login') }}" wire:navigate>Login</a>
                 </li>
                 <li>
                     <a class="dropdown-item" href="{{ route('register') }}" wire:navigate>Register</a>
@@ -16,14 +16,14 @@
                 @endguest
                 @auth
                 <li>
-                    <a class="dropdown-item" href="{{ route('account') }}">Your account</a>
+                    <a class="dropdown-item" href="{{ route('account') }}" wire:navigate>Your account</a>
                 </li>
                 <li>
                     <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                 </li>
                 @if(auth()->user()->is_admin)
                 <li>
-                    <a class="dropdown-item" href="#">Dashboard</a>
+                    <a class="dropdown-item" href="{{ route('admin') }}">Dashboard</a>
                 </li>
                 @endif
                 @endauth
