@@ -1,0 +1,29 @@
+{
+    "recommendations": [
+        "bmewburn.vscode-intelephense-client",
+        "neilbrayfield.php-docblocker",
+        "onecentlin.laravel-blade",
+        "onecentlin.laravel-extension-pack",
+        "ryannaddy.laravel-artisan",
+        "shufo.vscode-blade-formatter",
+        "amiralizadeh9480.laravel-extra-intellisense",
+        "mehedidracula.php-namespace-resolver",
+        "junstyle.php-cs-fixer",
+        "valeryanm.vscode-phpsab",
+        "cierra.livewire-vscode",
+        "livewire.livewire",
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode",
+        "formulahendry.auto-rename-tag",
+        "formulahendry.auto-close-tag",
+        "eamodio.gitlens",
+        "mikestead.dotenv",
+        "pkief.material-icon-theme",
+        "zhuangtongfa.material-theme",
+        "ms-vscode.vscode-json",
+        "ms-vscode.vscode-typescript-next"
+    ]
+}
+
+
+

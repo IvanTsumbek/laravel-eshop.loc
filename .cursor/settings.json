@@ -1,0 +1,106 @@
+{
+    "php.validate.enable": true,
+    "php.suggest.basic": false,
+    "intelephense.files.maxSize": 5000000,
+    "intelephense.environment.includePaths": [
+        "vendor/laravel/framework/src",
+        "vendor/livewire/livewire/src"
+    ],
+    "intelephense.stubs": [
+        "apache", "bcmath", "bz2", "calendar", "com_dotnet", "Core", "ctype", "curl", "date", "dba", "dom", "enchant", "exif", "FFI", "fileinfo", "filter", "fpm", "ftp", "gd", "gettext", "gmp", "hash", "iconv", "imap", "intl", "json", "ldap", "libxml", "mbstring", "meta", "mysqli", "oci8", "odbc", "openssl", "pcntl", "pcre", "PDO", "pdo_ibm", "pdo_mysql", "pdo_pgsql", "pdo_sqlite", "pgsql", "Phar", "posix", "pspell", "readline", "Reflection", "session", "shmop", "SimpleXML", "snmp", "soap", "sockets", "sodium", "SPL", "sqlite3", "standard", "superglobals", "sysvmsg", "sysvsem", "sysvshm", "tidy", "tokenizer", "xml", "xmlreader", "xmlrpc", "xmlwriter", "xsl", "Zend OPcache", "zip", "zlib"
+    ],
+    "phpstan.enabled": true,
+    "phpstan.configFile": "phpstan.neon",
+    "phpstan.executablePath": "./vendor/bin/phpstan",
+    
+    "files.associations": {
+        "*.blade.php": "blade",
+        "*.php": "php",
+        "*.blade": "blade",
+        "*.tpl": "blade"
+    },
+    
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "source.organizeImports": "explicit"
+    },
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "editor.defaultFormatter": "shufo.vscode-blade-formatter",
+    
+    "blade.format.enable": true,
+    "blade.format.indentSize": 4,
+    "blade.format.wrapAttributes": "auto",
+    "blade.format.wrapLineLength": 120,
+    "blade.format.formatEnable": true,
+    
+    "laravel.artisan": "php artisan",
+    "laravel.views.path": "resources/views",
+    "laravel.views.extension": "blade.php",
+    
+    "livewire.views.path": "resources/views/livewire",
+    "livewire.components.path": "app/Livewire",
+    
+    "tailwindCSS.includeLanguages": {
+        "blade": "html",
+        "php": "html"
+    },
+    "tailwindCSS.experimental.classRegex": [
+        ["class\\s*=\\s*['\"`]([^'\"`]*).*?['\"`]", "([\\w\\-:]+)"],
+        ["@class\\s*=\\s*['\"`]([^'\"`]*).*?['\"`]", "([\\w\\-:]+)"],
+        ["x-bind:class\\s*=\\s*['\"`]([^'\"`]*).*?['\"`]", "([\\w\\-:]+)"]
+    ],
+    "tailwindCSS.files.exclude": [
+        "**/.git/**",
+        "**/node_modules/**",
+        "**/.hg/**",
+        "**/.svn/**"
+    ],
+    
+    "search.exclude": {
+        "**/vendor": true,
+        "**/node_modules": true,
+        "**/storage": true,
+        "**/bootstrap/cache": true
+    },
+    
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": true
+    },
+    
+    "emmet.includeLanguages": {
+        "blade": "html"
+    },
+    
+    "prettier.enable": true,
+    "prettier.requireConfig": false,
+    "prettier.documentSelectors": ["**/*.blade.php", "**/*.js", "**/*.css"],
+    
+    "php-cs-fixer.executablePath": "./vendor/bin/pint",
+    "php-cs-fixer.onsave": true,
+    "php-cs-fixer.rules": "@PSR12",
+    
+    "workbench.colorTheme": "Default Dark+",
+    "editor.fontSize": 14,
+    "editor.fontFamily": "'Fira Code', 'Consolas', 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    
+    "[blade]": {
+        "editor.defaultFormatter": "shufo.vscode-blade-formatter",
+        "editor.formatOnSave": true
+    },
+    
+    "[php]": {
+        "editor.defaultFormatter": "junstyle.php-cs-fixer",
+        "editor.formatOnSave": true
+    }
+}
+
+
+

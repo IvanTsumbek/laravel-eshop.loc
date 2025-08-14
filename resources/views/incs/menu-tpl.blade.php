@@ -1,4 +1,4 @@
-<li @if (isset($item['children'])) class="nav-item dropend" @endif>
+<li @if (isset($item['children'])) class="nav-item dropend" @endif wire:key="{{ $item['id'] }}">
     @if (isset($item['children']))
         <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown"
            data-bs-auto-close="outside">{{ $item['title'] }}</a>

@@ -43,11 +43,16 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('admin') }}" wire:navigate>
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('admin.categories.index') }}" wire:navigate>
+                    <i class="fa-solid fa-bars-staggered"></i>
+                    <span>Categories</span></a>
             </li>
 
             <!-- Sidebar Toggler (Sidebar) -->
