@@ -30,4 +30,6 @@ Route::prefix('admin')->middleware('admin')->group(function(){
     Route::get('/', App\Livewire\Admin\HomeComponent::class)->name('admin');
     Route::get('/categories', App\Livewire\Admin\Category\CategoryIndexComponent::class)->name('admin.categories.index');
     Route::get('/categories/create', App\Livewire\Admin\Category\CategoryCreateComponent::class)->name('admin.categories.create');
+    Route::get('/categories/{category}/edit', App\Livewire\Admin\Category\CategoryEditComponent::class)->name('admin.categories.edit');
+
 });
