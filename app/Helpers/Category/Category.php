@@ -48,11 +48,13 @@ class Category
         return $str;
     }
 
-    public static function item2Tpl($item, $tab, $id): string
+    public static function item2Tpl($item, $tab, $id)
     {
-        ob_start();
-        echo view(self::$tpl, ['item' => $item, 'tab' => $tab, 'id' => $id]);
-        return ob_get_clean();
+        return (string) view(self::$tpl, ['item' => $item, 'tab' => $tab, 'id' => $id]);
+
+        // ob_start();
+        // echo view(self::$tpl, ['item' => $item, 'tab' => $tab, 'id' => $id]);
+        // return ob_get_clean();
     }
 
     public static function getCategories()
