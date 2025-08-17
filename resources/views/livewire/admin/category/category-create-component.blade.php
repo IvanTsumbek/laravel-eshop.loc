@@ -1,5 +1,12 @@
 <div class="row">
-    <div class="col-12 mb-4">
+    <div class="col-12 mb-4 position-relative">
+
+        <div class="update-loading" wire:loading wire:target="save">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <a wire:navigate href="{{ route('admin.categories.index') }}" class="btn btn-primary">Categories List</a>
@@ -10,7 +17,7 @@
 
                     <div class="mb-3">
                         <label for="title" class="form-label required">Title</label>
-                        <input type="title" class="form-control @error('title') is-invalid @enderror" id="title"
+                        <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
                             placeholder="Category title" wire:model="title">
                         @error('title')
                             <div class="invalid-feedback">
@@ -23,7 +30,7 @@
                         <label for="parent_id" class="form-label required">Parent category</label>
                         <select wire:model="parent_id" id="parent_id" class="custom-select"
                             @error('parent_id') is-invalid @enderror>
-                            <option value="0" wire:key="0">Root category</option>
+                            <option value="0">Root category</option>
                             {!! \App\Helpers\Category\Category::getMenu('incs.menu-select-tpl') !!}
                         </select>
                         @error('parent_id')
