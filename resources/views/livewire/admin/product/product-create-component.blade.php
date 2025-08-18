@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col-12 mb-4 position-relative">
 
+        {{-- Спинер. Не забываем родительскому контейнеру  position-relative--}}
         <div class="update-loading" wire:loading wire:target="save, category_id">
             <div class="spinner-border" role="status">
                 <span class="sr-only">Loading...</span>
@@ -28,8 +29,8 @@
 
                     <div class="mb-3">
                         <label for="category_id" class="form-label required">Category</label>
-                        <select wire:model.live="category_id" id="category_id" class="custom-select"
-                            @error('category_id') is-invalid @enderror>
+                        <select wire:model.live="category_id" id="category_id" class="custom-select
+                            @error('category_id') is-invalid @enderror">
                             <option value="">Select category</option>
                             {!! \App\Helpers\Category\Category::getMenu('incs.menu-select-tpl') !!}
                         </select>
@@ -129,6 +130,32 @@
                                 {{ $message }}
                             </div>
                         @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="image" class="form-check-label">Image</label>
+                        <input type="file" class="@error('image') is-invalid @enderror" id="image"
+                            wire:model="image">
+                        @error('image')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                        <div wire:loading wire:target="image"> {{-- loader изображения --}}
+                            <span class="text-success">Uploading...</span>
+                        </div>
+
+                        {{-- предпросмотр изображения --}}
+                        @if (!$errors->has('image') && $image && $image->isPreviewable())
+                        <p class="text-danger">Click on the photo to delete it.</p>
+                        <img
+                            src=" {{ $image->temporaryUrl() }} "
+                            alt=""
+                            height="100"
+                            wire:click="removeUpload('image', '{{ $image->getFileName() }}')">
+                        @endif
+
                     </div>
 
                     <div class="mb-3">

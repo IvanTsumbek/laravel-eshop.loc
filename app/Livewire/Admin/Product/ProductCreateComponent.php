@@ -10,7 +10,7 @@ use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\DB;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
-#[Layout('components.layouts.admin')]
+#[Layout('components.layouts.admin')] //в config/livewire происываем layout по default, a здесь не по default
 #[Title('Create Product')]
 class ProductCreateComponent extends Component
 {
@@ -25,12 +25,18 @@ class ProductCreateComponent extends Component
     public bool $is_new = false;
     public string $excerpt;
     public string $content = '';
-    #[Validate]
-    public $image;
+    #[Validate] //валидация прямо в браузере
+    public $image;//в config/filesystems.php создали массив 'public_uploads' с новым местом хранения изображений. В ключе .env пишем FILESYSTEM_DISK=public_uploads
     #[Validate]
     public $gallery;
 
-    #[Computed]
+    //метод вызывается автоматически если есть updated. Данные берет напрямую с JSON
+    public function updatedCategoryId()
+    {
+        $this->selectedFilters = [];
+    }
+
+    #[Computed] //метод вызывается автоматически и вычесляет сразу
     public function filters()
     {
         $filter_groups = [];
@@ -49,6 +55,29 @@ class ProductCreateComponent extends Component
             }
         }
         return $filter_groups;
+    }
+
+    protected function rules() //метод автоматически является валидатором для validate
+    {
+        return [
+            'title' => 'required|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'selectedFilters.*' => 'numeric',
+            'price' => 'required|integer',
+            'old_price' => 'integer',
+            'is_hit' => 'boolean',
+            'is_new' => 'boolean',
+            'excerpt' => 'nullable|max:255',
+            'content' => 'required',
+            'image' => 'nullable|image:mimes:jpg,jpeg,png|max:2048',
+            'gallery.*' => 'nullable|image:mimes:jpg,jpeg,png|max:2048',
+        ];
+    }
+
+    public function save()
+    {
+        $validated = $this->validate();
+        dd($validated);
     }
 
     public function render()
