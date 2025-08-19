@@ -133,8 +133,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="image" class="form-check-label">Image</label>
-                        <input type="file" class="@error('image') is-invalid @enderror" id="image"
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" class="form-control @error('image') is-invalid @enderror" id="image"
                             wire:model="image">
                         @error('image')
                             <div class="invalid-feedback">
@@ -157,6 +157,36 @@
                         @endif
 
                     </div>
+
+                    <div class="mb-3">
+                        <label for="gallery" class="form-label">Gallery</label>
+                        <input id="gallery" type="file" class="form-control @error('gallery.*') is-invalid @enderror"
+                               wire:model="gallery" placeholder="Gallery" multiple>
+                        @error('gallery.*')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                        <div wire:loading wire:target="gallery"> {{-- loader изображения --}}
+                            <span class="text-success">Uploading...</span>
+                        </div>
+                        {{-- предпросмотр массива изображений --}}
+                        @if($gallery)
+                            <p class="text-danger">Click on the photo to delete it</p>
+                            <div class="mt-2">
+                                @foreach($gallery as $photo)
+                                    @if($photo->isPreviewable())
+                                        <img src="{{ $photo->temporaryUrl() }}" alt="" width="100"
+                                             wire:click="removeUpload('gallery', '{{ $photo->getFilename() }}')">
+                                    @else
+                                        <span class="text-danger">error!</span>
+                                    @endif
+                                @endforeach
+                            </div>
+
+                        @endif
+                    </div>
+
 
                     <div class="mb-3">
                         <button type="submit" class="btn btn-info">
