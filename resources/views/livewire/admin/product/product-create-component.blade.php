@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-12 mb-4 position-relative">
 
-        {{-- Спинер. Не забываем родительскому контейнеру  position-relative--}}
+        {{-- Спинер. Не забываем родительскому контейнеру  position-relative --}}
         <div class="update-loading" wire:loading wire:target="save, category_id">
             <div class="spinner-border" role="status">
                 <span class="sr-only">Loading...</span>
@@ -29,7 +29,8 @@
 
                     <div class="mb-3">
                         <label for="category_id" class="form-label required">Category</label>
-                        <select wire:model.live="category_id" id="category_id" class="custom-select
+                        <select wire:model.live="category_id" id="category_id"
+                            class="custom-select
                             @error('category_id') is-invalid @enderror">
                             <option value="">Select category</option>
                             {!! \App\Helpers\Category\Category::getMenu('incs.menu-select-tpl') !!}
@@ -51,12 +52,11 @@
                                     <div class="card-body">
                                         @foreach ($filter_group as $filter)
                                             <div wire:key="{{ $filter->filter_id }}">
-                                                <input type="checkbox"
-                                                       wire:model="selectedFilters"
-                                                       value="{{ $filter->filter_id }}"
-                                                       id="filter-{{ $filter->filter_id }}">
+                                                <input type="checkbox" wire:model="selectedFilters"
+                                                    value="{{ $filter->filter_id }}"
+                                                    id="filter-{{ $filter->filter_id }}">
                                                 <label for="filter-{{ $filter->filter_id }}"
-                                                       class="form-check-label">{{ $filter->filter_title }}</label>
+                                                    class="form-check-label">{{ $filter->filter_title }}</label>
                                             </div>
                                         @endforeach
                                     </div>
@@ -122,11 +122,13 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="content" class="form-label required">Content</label>
-                        <textarea class="form-control @error('content') is-invalid @enderror" id="content" placeholder="Product content"
-                            wire:model="content" rows="10"></textarea>
+                        <label for="summernote" class="form-label required">Content</label>
+                        <div wire:ignore>
+                            <textarea class="form-control @error('content') is-invalid @enderror" id="summernote" placeholder="Product content"
+                                wire:model="content" rows="10"></textarea>
+                        </div>
                         @error('content')
-                            <div class="invalid-feedback">
+                            <div class="text-danger">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -148,36 +150,34 @@
 
                         {{-- предпросмотр изображения --}}
                         @if (!$errors->has('image') && $image && $image->isPreviewable())
-                        <p class="text-danger">Click on the photo to delete it.</p>
-                        <img
-                            src=" {{ $image->temporaryUrl() }} "
-                            alt=""
-                            height="100"
-                            wire:click="removeUpload('image', '{{ $image->getFileName() }}')">
+                            <p class="text-danger">Click on the photo to delete it.</p>
+                            <img src=" {{ $image->temporaryUrl() }} " alt="" height="100"
+                                wire:click="removeUpload('image', '{{ $image->getFileName() }}')">
                         @endif
 
                     </div>
 
                     <div class="mb-3">
                         <label for="gallery" class="form-label">Gallery</label>
-                        <input id="gallery" type="file" class="form-control @error('gallery.*') is-invalid @enderror"
-                               wire:model="gallery" placeholder="Gallery" multiple>
+                        <input id="gallery" type="file"
+                            class="form-control @error('gallery.*') is-invalid @enderror" wire:model="gallery"
+                            placeholder="Gallery" multiple>
                         @error('gallery.*')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                         @enderror
                         <div wire:loading wire:target="gallery"> {{-- loader изображения --}}
                             <span class="text-success">Uploading...</span>
                         </div>
                         {{-- предпросмотр массива изображений --}}
-                        @if($gallery)
+                        @if ($gallery)
                             <p class="text-danger">Click on the photo to delete it</p>
                             <div class="mt-2">
-                                @foreach($gallery as $photo)
-                                    @if($photo->isPreviewable())
+                                @foreach ($gallery as $photo)
+                                    @if ($photo->isPreviewable())
                                         <img src="{{ $photo->temporaryUrl() }}" alt="" width="100"
-                                             wire:click="removeUpload('gallery', '{{ $photo->getFilename() }}')">
+                                            wire:click="removeUpload('gallery', '{{ $photo->getFilename() }}')">
                                     @else
                                         <span class="text-danger">error!</span>
                                     @endif
@@ -202,3 +202,17 @@
         </div>
     </div>
 </div>
+@script  {{-- прикрутили редактор.
+              Не забываем для самого поля:wire:ignore for="summernote" id="summernote"
+              В layout не забываем про подключение скриптов и стилей--}}
+    <script>
+        $('#summernote').summernote({
+            callbacks: {
+                onChange: function(contents, $editable) {
+                    $wire.$set('content', contents, false);
+                }
+            },
+            height: 300
+        });
+    </script>
+@endscript
