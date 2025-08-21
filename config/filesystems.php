@@ -64,6 +64,11 @@ return [
             'driver' => 'local',
             'root' => public_path('uploads'),
         ],
+
+        'public_uploads_deletes' => [ //создали дополнительный диск для удаления. В контроллере index сам метод
+            'driver' => 'local',
+            'root' => public_path(),
+        ],
     ],
 
     /*
