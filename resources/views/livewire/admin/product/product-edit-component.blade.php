@@ -136,8 +136,14 @@
 
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
-                        <input type="file" class="form-control @error('image') is-invalid @enderror" id="image"
-                            wire:model="image">
+                        @if ($photo)
+                            <img src="{{ asset($photo) }}" alt="" height="50" class="ml-2">
+                        @else
+                            <img src="{{ asset($product->getImage()) }}" alt="" height="50"
+                                class="ml-2">
+                        @endif
+                        <input type="file" class="form-control @error('image') is-invalid @enderror"
+                            id="image" wire:model="image">
                         @error('image')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -147,7 +153,6 @@
                         <div wire:loading wire:target="image"> {{-- loader изображения --}}
                             <span class="text-success">Uploading...</span>
                         </div>
-
                         {{-- предпросмотр изображения --}}
                         @if (!$errors->has('image') && $image && $image->isPreviewable())
                             <p class="text-danger">Click on the photo to delete it.</p>
@@ -159,6 +164,22 @@
 
                     <div class="mb-3">
                         <label for="gallery" class="form-label">Gallery</label>
+                        @if ($photos)
+                        <div>
+                            <p class="text-danger">Click on the photo to delete it</p>
+                            @foreach ($photos as $k => $item)
+                            <img
+                                src="{{ asset($item) }}"
+                                alt=""
+                                height="50"
+                                class="ml-2"
+                                wire:key="{{ $k }}"
+                                wire:click="deleteGalleryItem({{ $k }})"
+                                wire:confirm="Are you sure?"
+                            >
+                            @endforeach
+                        </div>
+                        @endif
                         <input id="gallery" type="file"
                             class="form-control @error('gallery.*') is-invalid @enderror" wire:model="gallery"
                             placeholder="Gallery" multiple>
@@ -202,17 +223,20 @@
         </div>
     </div>
 </div>
-@script  {{-- прикрутили редактор.
+@script
+    {{-- прикрутили редактор.
               Не забываем для самого поля:wire:ignore for="summernote" id="summernote"
-              В layout не забываем про подключение скриптов и стилей--}}
+              В layout не забываем про подключение скриптов и стилей --}}
     <script>
-        $('#summernote').summernote({
-            callbacks: {
-                onChange: function(contents, $editable) {
-                    $wire.$set('content', contents, false);
-                }
-            },
-            height: 300
+        $(function() {
+            $('#summernote').summernote({
+                callbacks: {
+                    onChange: function(contents, $editable) {
+                        $wire.$set('content', contents, false);
+                    }
+                },
+                height: 300
+            });
         });
     </script>
 @endscript

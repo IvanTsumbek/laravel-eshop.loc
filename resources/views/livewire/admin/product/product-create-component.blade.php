@@ -203,16 +203,18 @@
     </div>
 </div>
 @script  {{-- прикрутили редактор.
-              Не забываем для самого поля:wire:ignore for="summernote" id="summernote"
-              В layout не забываем про подключение скриптов и стилей--}}
-    <script>
-        $('#summernote').summernote({
-            callbacks: {
-                onChange: function(contents, $editable) {
-                    $wire.$set('content', contents, false);
-                }
-            },
-            height: 300
-        });
-    </script>
+Не забываем для самого поля:wire:ignore for="summernote" id="summernote"
+В layout не забываем про подключение скриптов и стилей--}}
+<script>
+$(function (){
+$('#summernote').summernote({
+  callbacks: {
+      onChange: function(contents, $editable) {
+          $wire.$set('content', contents, false);
+      }
+  },
+  height: 300
+});
+});
+</script>
 @endscript
