@@ -28,7 +28,7 @@ class ProductEditComponent extends Component
     public int $old_price = 0;
     public bool $is_hit = false;
     public bool $is_new = false;
-    public string $excerpt;
+    public $excerpt;
     public string $content = '';
     public $photo;
     public $photos;
