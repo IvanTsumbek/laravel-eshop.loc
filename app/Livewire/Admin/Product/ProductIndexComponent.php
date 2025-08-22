@@ -20,19 +20,22 @@ class ProductIndexComponent extends Component
     public function deleteProduct(Product $product)
     {
         try {
+            $image = $product->image;
+            $gallery = $product->gallery;
             DB::beginTransaction();
 
             DB::table('filter_products')
                 ->where('product_id', '=', $product->id)
                 ->delete();
-            if ($product->image) {
-                Storage::disk('public_uploads_deletes')->delete($product->image);
-            }
-            if ($gallery = $product->gallery) {
-                Storage::disk('public_uploads_deletes')->delete($gallery);
-            }
-            $product->delete();
+                $product->delete();
             DB::commit();
+
+            if ($image) {
+                    Storage::disk('public_uploads_deletes')->delete($image);
+            }
+            if ($gallery) {
+                    Storage::disk('public_uploads_deletes')->delete($gallery);
+            }
             $this->js("toastr.success('Product removed')");
             return;
         } catch (\Exception $e) {

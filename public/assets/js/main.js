@@ -7,6 +7,24 @@ window.addEventListener('scroll', function () {
             $('html, body').animate({ scrollTop: 0 }, 500);
             return false;
         });
+        $(".owl-carousel-full").owlCarousel('destroy');
+        $(".owl-carousel-full").owlCarousel({
+            margin: 20,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                500: {
+                    items: 2
+                },
+                700: {
+                    items: 3
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        });
     });
 
 $(document).ready(function () {
@@ -37,6 +55,6 @@ toastr.options = {
     "hideMethod": "slideUp"
 }
 
-window.addEventListener("popstate", function (e) {
-    window.location.reload();
-});
+// window.addEventListener("popstate", function (e) {
+//     window.location.reload();
+// });

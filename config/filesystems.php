@@ -60,7 +60,7 @@ return [
             'report' => false,
         ],
 
-         'public_uploads' => [
+        'public_uploads' => [
             'driver' => 'local',
             'root' => public_path('uploads'),
         ],
