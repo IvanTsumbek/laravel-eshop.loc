@@ -122,6 +122,7 @@
                     </div>
 
                     <div class="mb-3">
+                        <livewire:admin.file-manager.file-manager-component> {{-- прикрутили графический редактор--}}
                         <label for="summernote" class="form-label required">Content</label>
                         <div wire:ignore>
                             <textarea class="form-control @error('content') is-invalid @enderror" id="summernote" placeholder="Product content"
