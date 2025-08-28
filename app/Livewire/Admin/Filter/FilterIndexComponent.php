@@ -16,6 +16,24 @@ class FilterIndexComponent extends Component
 {
     use WithPagination;
 
+    public function deleteFilter(Filter $filter)
+    {
+        try {
+            DB::beginTransaction();
+            DB::table('filter_products')
+                ->where('filter_id', '=', $filter->id)
+                ->delete();
+            $filter->delete();
+            DB::commit();
+            $this->js("toastr.success('Filter removed')");
+            return;
+        } catch (\Exception $e){
+            DB::rollback();
+            Log::error($e->getMessage());
+            $this->js("toastr.error('Error deliting filter')");
+        }
+    }
+
     public function render()
     {
         $filters = Filter::query()->with('group')->paginate();
