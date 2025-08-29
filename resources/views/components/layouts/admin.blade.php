@@ -90,8 +90,14 @@
                     <i class="fa-solid fa-filter"></i>
                     <span>Add filter</span></a>
             </li>
+
             <hr class="sidebar-divider">
 
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('admin.orders.index') }}" wire:navigate>
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Orders</span></a>
+            </li>
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
