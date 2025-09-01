@@ -15,7 +15,7 @@ class UserIndexComponent extends Component
     use WithPagination;
     public function render()
     {
-        $users = User::query()->orderBy('id', 'desc')->paginate(1);
+        $users = User::query()->orderBy('id', 'desc')->paginate();
         return view('livewire.admin.user.user-index-component', compact('users'));
     }
 }
