@@ -94,9 +94,14 @@
             <hr class="sidebar-divider">
 
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('admin.orders.index') }}" wire:navigate>
+                <a class="nav-link" href="{{ route('admin.users.index') }}" wire:navigate>
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span>Orders</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('admin.users.index') }}" wire:navigate>
+                    <i class="fa-solid fa-users"></i>
+                    <span>Users</span></a>
             </li>
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
