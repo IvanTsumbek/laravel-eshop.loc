@@ -136,3 +136,12 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
+.slidebar .nav-item .nav-link {
+    padding: 5rem 1rem;
+}
+
+.slidebar .nav-item .nav-link.active,
+.slidebar .nav-item .nav-link.active i {
+    color: #fff;
+}
